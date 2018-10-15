@@ -3,7 +3,7 @@ import {ReactElement} from 'react'
 import {withGlobalProgress, withToast} from 'react-components'
 import {Checkbox, TableBody, TableCell} from '@material-ui/core'
 import autobind from 'autobind-decorator'
-import {RootState} from '../../core/redux'
+import {RootState} from '../../core/redux/reducer/index'
 import {datatableConsumer, IDatatableContext} from './Datatable'
 import {connect} from 'react-redux'
 
@@ -21,12 +21,12 @@ class DatatableBody extends React.Component<IProps & ReturnType<typeof state2pro
         {children}
         {data ? data.map((d, i) => {
           const row = renderRow(d)
-          return React.cloneElement(row, {key: d.id}, [
+          return React.cloneElement(row, {key: d.id, index: i}, [
             onSelect &&
             <TableCell key={1}>
-              <Checkbox checked={selected.indexOf(i) !== -1} onChange={this.handleSelect(i)}/>
+              <Checkbox checked={selected.indexOf(i) !== -1} onClick={this.handleSelect(i)}/>
             </TableCell>,
-            React.Children.map(row.props.children, (c, i) => isColumnVisible(i) && c)
+            React.Children.map(row.props.children, (c, j) => isColumnVisible(j) && c)
           ])
         }) : <></>}
       </TableBody>
@@ -35,7 +35,8 @@ class DatatableBody extends React.Component<IProps & ReturnType<typeof state2pro
 
   @autobind
   private handleSelect(i: number) {
-    return () => {
+    return (event) => {
+      event.stopPropagation()
       const {onSelect, selected} = this.props
       const x = selected.indexOf(i)
       if (x === -1) {

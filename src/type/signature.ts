@@ -1,4 +1,5 @@
 import {Id, Url} from './basics'
+import {IEntity} from './entity'
 
 export enum SignatureStatus {
   READY = 'READY',
@@ -9,8 +10,7 @@ export enum SignatureStatus {
   PENDING_VALIDATION = 'PENDING_VALIDATION',
 }
 
-export interface ISignature {
-  id: Id;
+export interface ISignature extends IEntity {
   language: string;
   fileUrl: Url;
   fileToSignUrl: Url;

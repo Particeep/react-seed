@@ -32,7 +32,7 @@ class DatatableColumnsFilter extends React.Component<IProps> {
       <div>
         <IconBtn onClick={this.open}>
           {/*<Badge badgeContent="1" classes={{badge: this.allColumnsHidden() ? classes.hiddenBadge : ''}} color="primary">*/}
-            <Icon>remove_red_eye</Icon>
+          <Icon>remove_red_eye</Icon>
           {/*</Badge>*/}
         </IconBtn>
         <Menu

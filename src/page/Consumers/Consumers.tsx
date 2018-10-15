@@ -2,9 +2,9 @@ import * as React from 'react'
 import {createStyles, Grid, Theme, Typography, WithStyles, withStyles} from '@material-ui/core'
 import {WithI18n, withI18n} from '../../core/i18n/withI18n'
 import {connect} from 'react-redux'
-import {RootState} from '../../core/redux'
+import {RootState} from '../../core/redux/reducer/index'
 import {compose} from 'redux'
-import {loadConsumers} from '../../core/action/consumerAction'
+import {loadConsumers} from '../../core/redux/action/consumerAction'
 import ConsumerCard from './ConsumerCard'
 import {AnimateList, Btn, withGlobalProgress, withToast} from 'react-components'
 import Page from '../../shared/Page/Page'
@@ -65,21 +65,16 @@ class Consumers extends React.Component<IProps, any> {
   }
 
   async componentDidMount() {
-    const {getConsumers, progressEnd, progressStop, toastError, progressStart} = this.props
-    progressStart()
-    try {
-      await getConsumers()
-      progressEnd()
-    } catch (error) {
-      toastError(error.msg)
-      progressStop()
-    }
+    const {getConsumers, toastError, promisesWithProgress} = this.props
+    promisesWithProgress(
+      getConsumers().catch(err => toastError(err.msg))
+    )
   }
 }
 
 const state2props = (state: RootState) => ({
   isFetching: state.consumers.isFetching,
-  consumers: state.consumers.entity,
+  consumers: state.consumers.entities,
   error: state.consumers.error,
 })
 

@@ -1,9 +1,8 @@
-import {Id} from '../basics'
 import {mapAmountFromApi, mapDateFromApi} from '../../core/utils'
 import {mapPaginationFromApi} from '../paginated'
+import {IEntity} from '../entity'
 
-export interface IFundraise {
-  id: Id;
+export interface IFundraise extends IEntity {
   created_at: Date;
   fundraise_type: FundraiseType;
   fundraise_id: string;
@@ -26,7 +25,6 @@ export interface IFundraise {
   equity: Equity;
   loan: Loan;
 }
-
 
 interface Loan {
   start_at: Date;

@@ -1,17 +1,17 @@
-import {RootState} from '../redux'
-import {Criteria, OrderByType} from '../../type/criteria/criteria'
-import {IPagination} from '../../type/paginated'
-import {IPaginateState} from '../redux/generic/paginateReducer'
-import {API} from './_Action'
+import {RootState} from '../reducer/index'
+import {Criteria, OrderByType} from '../../../type/criteria/criteria'
+import {IPagination} from '../../../type/paginated'
+import {IPaginateState} from '../reducer/generic/paginateReducer'
+import {_API} from './_Action'
 
-export const PAGINATE = (name: string) => ({
+export const _PAGINATE = (name: string) => ({
   INIT: `PAGINATE_${name}_INIT`,
   NEXT_PAGE: `PAGINATE_${name}_NEXT_PAGE`,
   PREV_PAGE: `PAGINATE_${name}_PREV_PAGE`,
   GO_TO_PAGE: `PAGINATE_${name}_GO_TO_PAGE`,
   UPDATE_CRITERIA: `PAGINATE_${name}_UPDATE_CRITERIA`,
   SORT: `PAGINATE_${name}_SORT`,
-  ...API(`PAGINATE_${name}`)
+  ..._API(`PAGINATE_${name}`)
 })
 
 export class PaginateAction<T> {
@@ -21,27 +21,27 @@ export class PaginateAction<T> {
   }
 
   nextPage = () => (dispatch, getState: () => RootState) => {
-    dispatch({type: PAGINATE(this.name).NEXT_PAGE})
+    dispatch({type: _PAGINATE(this.name).NEXT_PAGE})
     return this.fetch(dispatch, getState)
   }
 
   prevPage = () => (dispatch, getState: () => RootState) => {
-    dispatch({type: PAGINATE(this.name).PREV_PAGE})
+    dispatch({type: _PAGINATE(this.name).PREV_PAGE})
     return this.fetch(dispatch, getState)
   }
 
   goToPage = (pageNumber: number) => (dispatch, getState: () => RootState) => {
-    dispatch({type: PAGINATE(this.name).GO_TO_PAGE, pageNumber})
+    dispatch({type: _PAGINATE(this.name).GO_TO_PAGE, pageNumber})
     return this.fetch(dispatch, getState)
   }
 
   sort = (sortBy: string, orderBy: OrderByType) => (dispatch, getState: () => RootState) => {
-    dispatch({type: PAGINATE(this.name).SORT, sortBy, orderBy})
+    dispatch({type: _PAGINATE(this.name).SORT, sortBy, orderBy})
     return this.fetch(dispatch, getState)
   }
 
   updateCriteria = (name: string, value: any) => (dispatch, getState: () => RootState) => {
-    dispatch({type: PAGINATE(this.name).UPDATE_CRITERIA, name, value})
+    dispatch({type: _PAGINATE(this.name).UPDATE_CRITERIA, name, value})
     return this.fetch(dispatch, getState)
   }
 

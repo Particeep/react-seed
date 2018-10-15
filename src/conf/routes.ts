@@ -4,6 +4,7 @@ import {IPagination} from '../type/paginated'
 import {IUser, mapUsersFromApi} from '../type/user'
 import {UserCriteria} from '../type/criteria/userCriteria'
 import {IFundraise, mapFundraisesPaginationFromApi} from '../type/enterprise/fundraise'
+import {IContextLoanequity} from '../type/context-loanequity'
 
 const query = `
 query Fundraise_search($limit: Int, $offset: Int, $sort_by: String, $order_by: String, $global_search: String, $statuses: String, $fundraise_type: String, $fundraise_id: String, $targeting_roles: String, $created_after: DateTime, $created_before: DateTime, $end_before: DateTime, $end_after: DateTime) {
@@ -132,10 +133,14 @@ export const consumerRoute = (key: ConsumerKey) => {
       search: (c?: UserCriteria): Promise<IPagination<IUser>> => pcHttp.get(`${base}/user/search`, c).then(mapUsersFromApi),
     },
     fundraises: {
-      search: (c?: UserCriteria): Promise<IPagination<IFundraise>> => pcHttp.post(`/app/${key}/graphql`, {
+      search: (c?: UserCriteria): Promise<IPagination<IFundraise>> => pcHttp.post(`${base}/graphql`, {
         query,
         variables: c
       }).then(x => mapFundraisesPaginationFromApi(x.data.fundraise_searchs)),
+    },
+    context: {
+      getLoanequity: (): Promise<IContextLoanequity> => pcHttp.get(`${base}/context/loan-equity`),
+      postLoanequity: (c: IContextLoanequity): Promise<IContextLoanequity> => pcHttp.post(`${base}/context/loan-equity`, c),
     }
   }
 }

@@ -2,8 +2,7 @@ import * as React from 'react'
 import {createStyles, Icon, TableCell, TableRow, Theme, WithStyles, withStyles} from '@material-ui/core'
 import {WithI18n, withI18n} from '../../../core/i18n/withI18n'
 import {compose} from 'redux'
-import {AnimateList, IconBtn, withGlobalProgress, withToast} from 'react-components'
-import {TableSortCell} from '../../../shared/TableSort'
+import {Animate, AnimateList, IconBtn, withGlobalProgress, withToast, TableSortCell} from 'react-components'
 import autobind from 'autobind-decorator'
 import {connect} from 'react-redux'
 import PageHead from '../../../shared/PageHead/PageHead'
@@ -13,11 +12,13 @@ import Page from '../../../shared/Page/Page'
 import {Panel} from '../../../shared/Panel'
 import {IUser} from '../../../type/user'
 import {css} from '../../../conf/style'
-import {PaginateAction} from '../../../core/action/paginateAction'
-import {fetchUsers} from '../../../core/action/userAction'
+import {PaginateAction} from '../../../core/redux/action/paginateAction'
+import {fetchUsers} from '../../../core/redux/action/userAction'
+import DatatableRow from '../../../shared/Datatable/DatatableRow'
+import {ReactChild} from 'react'
 
 const styles = (t: Theme) => createStyles({
-  claimed: {
+  claimed: {
     color: css.colorSuccess,
   },
   notClaimed: {
@@ -67,17 +68,35 @@ class Users extends React.Component<IProps & ReturnType<typeof dispatch2props>, 
 
 
   @autobind
-  private renderRow(t: IUser) {
+  private renderRow(u: IUser) {
     const {formatDate, classes} = this.props
     return (
-      <TableRow>
-        <TableCell>{formatDate(t.created_at)}</TableCell>
-        <TableCell>{t.first_name}</TableCell>
-        <TableCell>{t.last_name}</TableCell>
-        <TableCell>{t.email}</TableCell>
-        <TableCell>{t.phone}</TableCell>
-        <TableCell>{t.has_been_claimed ? <Icon className={classes.claimed}>check</Icon> : <Icon className={classes.notClaimed}>clear</Icon>}</TableCell>
-      </TableRow>
+      <DatatableRow expendedChild={this.renderExpendedRow(u)}>
+        <TableCell>{formatDate(u.created_at)}</TableCell>
+        <TableCell>{u.first_name}</TableCell>
+        <TableCell>{u.last_name}</TableCell>
+        <TableCell>{u.email}</TableCell>
+        <TableCell>{u.phone}</TableCell>
+        <TableCell>{u.has_been_claimed ? <Icon className={classes.claimed}>check</Icon> :
+          <Icon className={classes.notClaimed}>clear</Icon>}</TableCell>
+      </DatatableRow>
+    )
+  }
+
+  private renderExpendedRow(u: IUser): ReactChild {
+    return (
+      <>
+        {u.address &&
+        <div>
+          {u.address.number}
+          {u.address.street}
+          {u.address.city}
+          {u.address.zip}
+          {u.address.country}
+        </div>
+        }
+        {u.bio}
+      </>
     )
   }
 

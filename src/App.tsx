@@ -5,8 +5,9 @@ import {Redirect, Route, Switch} from 'react-router'
 import {config} from './conf/config'
 import Consumers from './page/Consumers/Consumers'
 import Consumer from './page/Consumer/Consumer'
+import {GlobalProgressBar} from 'react-components'
 
-const paddingTop = (t: Theme) => 0;
+const paddingTop = (t: Theme) => 0
 
 const styles = (t: Theme) => createStyles({
   body: {
@@ -19,7 +20,7 @@ const styles = (t: Theme) => createStyles({
     left: 0,
     right: 0,
   }
-});
+})
 
 interface IProps extends WithStyles<typeof styles> {
 
@@ -28,10 +29,11 @@ interface IProps extends WithStyles<typeof styles> {
 class App extends React.Component<IProps, {}> {
 
   render() {
-    const {classes} = this.props;
+    const {classes} = this.props
     return (
       <BrowserRouter basename={config.basePath}>
         <div className={classes.body}>
+        <GlobalProgressBar/>
           <Switch>
             <Route path="/consumers" component={Consumers}/>
             <Route path="/consumer/:key" component={Consumer}/>
@@ -39,8 +41,8 @@ class App extends React.Component<IProps, {}> {
           </Switch>
         </div>
       </BrowserRouter>
-    );
+    )
   }
 }
 
-export default withStyles(styles)(App);
+export default withStyles(styles)(App)

@@ -1,16 +1,21 @@
 import * as React from 'react'
 import {ReactElement} from 'react'
 import {OrderByType} from '../../type/criteria/criteria'
-import {TableSort, TableSortCell} from '../TableSort'
-import {withGlobalProgress, withToast} from 'react-components'
-import {Checkbox} from '@material-ui/core'
+import {withGlobalProgress, withToast, TableSort, TableSortCell} from 'react-components'
+import {Checkbox, createStyles, Theme, withStyles, WithStyles} from '@material-ui/core'
 import autobind from 'autobind-decorator'
 import {datatableConsumer, IDatatableContext} from './Datatable'
-import {RootState} from '../../core/redux'
+import {RootState} from '../../core/redux/reducer/index'
 import {connect} from 'react-redux'
-import {ITableSortCellProps} from '../TableSort/TableSortCell'
+import {ITableSortCellProps} from '../../type/lib/tableCellProps'
 
-interface IProps extends IDatatableContext {
+const styles = (t: Theme) => createStyles({
+  root: {
+    background: t.palette.background.default,
+  }
+})
+
+interface IProps extends IDatatableContext, WithStyles<typeof styles> {
   dispatch: any
   children: ReactElement<any>
 }
@@ -18,9 +23,10 @@ interface IProps extends IDatatableContext {
 class DatatableHead extends React.Component<IProps & ReturnType<typeof state2props>> {
 
   render() {
-    const {children, criteria, selected, onSelect, isColumnVisible} = this.props
+    const {children, criteria, classes, selected, onSelect, isColumnVisible} = this.props
     return (
       <TableSort
+        className={classes.root}
         sortBy={criteria.sort_by!}
         orderBy={criteria.order_by!}
         onSort={this.handleSortChange!}>
@@ -50,7 +56,7 @@ class DatatableHead extends React.Component<IProps & ReturnType<typeof state2pro
   @autobind
   private handleSelect() {
     const {selected, onSelect, criteria} = this.props
-    let newSelected: number[] = []
+    const newSelected: number[] = []
     if (selected.length === 0) for (let i = 0; i < criteria.limit; i++) newSelected.push(i)
     onSelect(newSelected)
   }
@@ -75,4 +81,6 @@ const state2props = (state: RootState, ownProps: IProps) => {
   }
 }
 
-export default datatableConsumer(connect(state2props)(DatatableHead))
+export default datatableConsumer(connect(state2props)(
+  withStyles(styles)(DatatableHead)
+))

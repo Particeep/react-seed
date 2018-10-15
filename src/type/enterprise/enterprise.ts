@@ -1,8 +1,7 @@
-import {Id} from '../basics'
 import {Address} from 'cluster'
+import {IEntity} from '../entity'
 
-export interface Enterprise {
-  id: Id;
+export interface Enterprise extends IEntity {
   created_at: Date;
   name: string;
   activity_domain: string;

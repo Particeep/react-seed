@@ -2,9 +2,9 @@ import * as React from 'react'
 import {createStyles, Theme, WithStyles, withStyles} from '@material-ui/core'
 import {WithI18n, withI18n} from '../../core/i18n/withI18n'
 import {connect} from 'react-redux'
-import {RootState} from '../../core/redux'
+import {RootState} from '../../core/redux/reducer/index'
 import {compose} from 'redux'
-import {loadConsumer} from '../../core/action/consumerAction'
+import {loadConsumer} from '../../core/redux/action/consumerAction'
 import {Sidebar} from '../../core/component/Sidebar'
 import SidebarLayout from '../../core/component/Sidebar/SidebarLayout'
 import {Redirect, Route, RouteComponentProps, Switch, withRouter} from 'react-router'
@@ -47,16 +47,11 @@ class Consumer extends React.Component<IProps, any> {
     )
   }
 
-  async componentDidMount() {
-    const {getConsumer, progressEnd, progressStop, toastError, progressStart} = this.props
-    progressStart()
-    try {
-      await getConsumer()
-      progressEnd()
-    } catch (error) {
-      toastError(error.msg)
-      progressStop()
-    }
+  componentDidMount() {
+    const {getConsumer, promisesWithProgress, toastError} = this.props
+    promisesWithProgress(
+      getConsumer().catch(err => toastError(err.msg))
+    )
   }
 
   private route(path: string = '') {

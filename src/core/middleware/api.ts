@@ -1,7 +1,7 @@
-export const CALL_API = 'Call API'
+export const _CALL_API = 'Call API'
 
 export default store => next => action => {
-  const callAPI = action[CALL_API]
+  const callAPI = action[_CALL_API]
   if (typeof callAPI === 'undefined') {
     return next(action)
   }
@@ -18,7 +18,7 @@ export default store => next => action => {
 
   const actionWith = data => {
     const finalAction = Object.assign({}, action, data)
-    delete finalAction[CALL_API]
+    delete finalAction[_CALL_API]
     return finalAction
   }
 

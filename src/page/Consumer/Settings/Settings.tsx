@@ -7,8 +7,8 @@ import {connect} from 'react-redux'
 import PageHead from '../../../shared/PageHead/PageHead'
 import PageHeadLink from '../../../shared/PageHead/PageHeadLink'
 import {Redirect, Route, RouteComponentProps, Switch, withRouter} from 'react-router'
-import SettingsConfig from './SettingsConfig'
-import SettingsGeneral from './SettingsGeneral'
+import SettingsConfig from './Config/SettingsConfig'
+import SettingsGeneral from './General/SettingsGeneral'
 
 const styles = (t: Theme) => createStyles({})
 
@@ -23,9 +23,9 @@ class Users extends React.Component<IProps, {}> {
     const {t} = this.props
     return (
       <>
-        <PageHead title={t.Users_title}>
-          <PageHeadLink to={this.route('/general')} label="general"/>
-          <PageHeadLink to={this.route('/config')} label="config"/>
+        <PageHead title={t.settings}>
+          <PageHeadLink to={this.route('/general')} label={t.general}/>
+          <PageHeadLink to={this.route('/config')} label={t.configuration}/>
         </PageHead>
         <Switch>
           <Route path={this.route('/general')} component={SettingsGeneral}/>
@@ -38,9 +38,6 @@ class Users extends React.Component<IProps, {}> {
 
   private route(path: string = '') {
     return this.props.match.url + path
-  }
-
-  componentDidMount() {
   }
 }
 

@@ -4,6 +4,7 @@ import {createStyles, Icon, Theme, WithStyles, withStyles} from '@material-ui/co
 import {NavLink} from 'react-router-dom'
 import classNames from 'classnames'
 import {css} from '../../../conf/style'
+import {fade} from '@material-ui/core/styles/colorManipulator'
 
 const styles = (t: Theme) => createStyles({
   root: {
@@ -30,7 +31,7 @@ const styles = (t: Theme) => createStyles({
   },
   rootActive: {
     color: t.palette.primary.main,
-    background: t.palette.primary[50],
+    background: fade(t.palette.primary.main, .16),
     borderRight: `2px solid ${t.palette.primary.main}`,
   },
   i: {

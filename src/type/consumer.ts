@@ -1,5 +1,6 @@
 import {Id} from './basics'
 import {mapDateFromApi} from '../core/utils'
+import {IEntity} from './entity'
 
 export enum PaymentProvider {
   HIPAY = 'HIPAY',
@@ -13,12 +14,9 @@ export enum Template {
   AAP = 'AAP',
 }
 
-export type ConsumerId = Id;
-
 export type ConsumerKey = Id;
 
-export interface IConsumer {
-  id?: ConsumerId;
+export interface IConsumer extends IEntity {
   name: string;
   email: string;
   key: ConsumerKey;
@@ -44,3 +42,5 @@ export const mapConsumerFromApi = (consumerApi: any): IConsumer => ({
 })
 
 export const mapConsumersFromApi = (consumersApi: any[]): IConsumer[] => consumersApi.map(mapConsumerFromApi)
+
+

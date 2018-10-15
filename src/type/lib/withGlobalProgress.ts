@@ -3,4 +3,5 @@ export interface WithGlobalProgress {
   readonly progressStop: () => void;
   readonly progressEnd: () => void;
   readonly progressNext: () => void;
+  readonly promisesWithProgress: (...p: Array<Promise<any>>) => void;
 }

@@ -11,8 +11,7 @@ import {
 } from '@material-ui/core'
 import {WithI18n, withI18n} from '../../../core/i18n/withI18n'
 import {compose} from 'redux'
-import {AnimateList, withGlobalProgress, withToast} from 'react-components'
-import {TableSortCell} from '../../../shared/TableSort'
+import {TableSortCell, AnimateList, withGlobalProgress, withToast} from 'react-components'
 import {Datatable, DatatableBody, DatatableHead, DatatableToolbar} from '../../../shared/Datatable'
 import autobind from 'autobind-decorator'
 import Page from '../../../shared/Page/Page'
@@ -20,7 +19,8 @@ import {IFundraise} from '../../../type/enterprise/fundraise'
 import PageHead from '../../../shared/PageHead/PageHead'
 import Panel from '../../../shared/Panel/Panel'
 import {css} from '../../../conf/style'
-import {fetchFundraises} from '../../../core/action/fundraiseAction'
+import {fetchFundraises} from '../../../core/redux/action/fundraiseAction'
+import DatatableRow from '../../../shared/Datatable/DatatableRow'
 
 const styles = (t: Theme) => createStyles({
   statusINIT: {
@@ -79,7 +79,7 @@ class Fundraises extends React.Component<IProps, {}> {
   private renderRow(f: IFundraise) {
     const {formatAmount, formatDateTime, t, classes} = this.props
     return (
-      <TableRow>
+      <DatatableRow>
         <TableCell>{formatDateTime(f.created_at)}</TableCell>
         <TableCell>{f.name}</TableCell>
         <TableCell>{formatAmount(f.amount_engaged)}</TableCell>
@@ -95,7 +95,7 @@ class Fundraises extends React.Component<IProps, {}> {
         <TableCell>
           {t['fundraiseType_' + f.fundraise_type]}
         </TableCell>
-      </TableRow>
+      </DatatableRow>
     )
   }
 }

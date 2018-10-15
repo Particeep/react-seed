@@ -4,10 +4,9 @@ import {createStyles, Icon, Theme, Typography, WithStyles, withStyles} from '@ma
 import {WithI18n, withI18n} from '../../core/i18n/withI18n'
 import {compose} from 'redux'
 import {IConsumer} from '../../type/consumer'
-import Card from '../../shared/Panel/Panel'
-import CardContent from '../../shared/Panel/PanelContent'
 import {Em, H1} from '../../shared/tag/tag'
 import Link from '../../shared/Link/Link'
+import {Panel, PanelContent} from '../../shared/Panel'
 
 const styles = (t: Theme) => createStyles({
   tag: {
@@ -34,15 +33,15 @@ class ConsumerCard extends React.Component<IProps, any> {
     const {formatDate, consumer, t} = this.props
     return (
       <Link to={`/consumer/${consumer.key}`}>
-        <Card hoverable>
-          <CardContent>
+        <Panel hoverable>
+          <PanelContent>
             <Em>{formatDate(consumer.created_at)}</Em>
             <H1 paragraph noWrap gutterBottom>{consumer.name}</H1>
             {this.renderTag('style', t['Template_' + consumer.template])}
             {this.renderTag('payment', consumer.wallet_service)}
             {this.renderTag('gesture', consumer.signature_service)}
-          </CardContent>
-        </Card>
+          </PanelContent>
+        </Panel>
       </Link>
     )
   }
