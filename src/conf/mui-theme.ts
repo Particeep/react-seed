@@ -6,6 +6,10 @@ const Table = {
       whiteSpace: 'nowrap',
       paddingLeft: 12,
       paddingRight: 12,
+
+      '&:last-child': {
+        paddingRight: 'invalid property to reset default padding',
+      }
     },
   },
   MuiTableRow: {

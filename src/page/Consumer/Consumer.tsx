@@ -15,6 +15,7 @@ import Users from './Users/Users'
 import Fundraises from './Fundraises/Fundraises'
 import Settings from './Settings/Settings'
 import Dashboard from './Dashboard/Dashboard'
+import User from './User/User'
 
 const styles = (t: Theme) => createStyles({})
 
@@ -38,6 +39,7 @@ class Consumer extends React.Component<IProps, any> {
           <Switch>
             <Route path={this.route('/dashboard')} component={Dashboard}/>
             <Route path={this.route('/users')} component={Users}/>
+            <Route path={this.route('/user/:id')} component={User}/>
             <Route path={this.route('/fundraises')} component={Fundraises}/>
             <Route path={this.route('/settings')} component={Settings}/>
             <Redirect exact from={this.route('')} to={this.route('/dashboard')}/>

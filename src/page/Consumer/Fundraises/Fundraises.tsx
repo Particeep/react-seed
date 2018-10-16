@@ -56,8 +56,10 @@ class Fundraises extends React.Component<IProps, {}> {
         <PageHead title={t.Fundraises_title}/>
         <Page>
           <Panel>
-            <Datatable name="fundraises" action={fetchFundraises}>
-              <DatatableToolbar search="global_search"/>
+            <Datatable
+              name="fundraises"
+              action={fetchFundraises}
+              toolbar={<DatatableToolbar search="global_search"/>}>
               <DatatableHead>
                 <TableSortCell name="created_at">{t.created_at}</TableSortCell>
                 <TableSortCell name="name">{t.name}</TableSortCell>

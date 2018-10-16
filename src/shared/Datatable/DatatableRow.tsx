@@ -16,7 +16,7 @@ const styles = (t: Theme) => createStyles({
   root: {
     transition: t.transitions.create('all'),
     opacity: 0,
-    transform: 'translate(60px, 60px)',
+    transform: 'translate(0, 60px)',
   },
   root_appeared: {
     opacity: 1,
