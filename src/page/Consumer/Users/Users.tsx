@@ -1,8 +1,9 @@
 import * as React from 'react'
-import {createStyles, Icon, TableCell, TableRow, Theme, WithStyles, withStyles} from '@material-ui/core'
+import {ReactChild} from 'react'
+import {Chip, createStyles, Icon, TableCell, Theme, WithStyles, withStyles} from '@material-ui/core'
 import {WithI18n, withI18n} from '../../../core/i18n/withI18n'
 import {compose} from 'redux'
-import {Animate, AnimateList, IconBtn, withGlobalProgress, withToast, TableSortCell} from 'react-components'
+import {Animate, AnimateList, IconBtn, TableSortCell, withGlobalProgress, withToast} from 'react-components'
 import autobind from 'autobind-decorator'
 import {connect} from 'react-redux'
 import PageHead from '../../../shared/PageHead/PageHead'
@@ -15,7 +16,7 @@ import {css} from '../../../conf/style'
 import {PaginateAction} from '../../../core/redux/action/paginateAction'
 import {fetchUsers} from '../../../core/redux/action/userAction'
 import DatatableRow from '../../../shared/Datatable/DatatableRow'
-import {ReactChild} from 'react'
+import Link from '../../../shared/Link/Link'
 
 const styles = (t: Theme) => createStyles({
   claimed: {
@@ -48,8 +49,8 @@ class Users extends React.Component<IProps & ReturnType<typeof dispatch2props>, 
             <Datatable
               name={paginateName}
               action={paginateAction}
+              toolbar={<DatatableToolbar search="global_search"/>}
               onSelect={console.log}>
-              <DatatableToolbar search="global_search"/>
               <DatatableHead>
                 <TableSortCell name="created_at">{t.Users_created_at}</TableSortCell>
                 <TableSortCell name="first_name">{t.firstName}</TableSortCell>
@@ -57,6 +58,7 @@ class Users extends React.Component<IProps & ReturnType<typeof dispatch2props>, 
                 <TableSortCell name="email">{t.email}</TableSortCell>
                 <TableSortCell name="phone">{t.phone}</TableSortCell>
                 <TableSortCell name="roles">{t.validated}</TableSortCell>
+                <TableSortCell></TableSortCell>
               </DatatableHead>
               <DatatableBody renderRow={this.renderRow}/>
             </Datatable>
@@ -77,8 +79,19 @@ class Users extends React.Component<IProps & ReturnType<typeof dispatch2props>, 
         <TableCell>{u.last_name}</TableCell>
         <TableCell>{u.email}</TableCell>
         <TableCell>{u.phone}</TableCell>
-        <TableCell>{u.has_been_claimed ? <Icon className={classes.claimed}>check</Icon> :
-          <Icon className={classes.notClaimed}>clear</Icon>}</TableCell>
+        <TableCell>
+          {u.has_been_claimed ?
+            <Icon className={classes.claimed}>check</Icon> :
+            <Icon className={classes.notClaimed}>clear</Icon>
+          }
+        </TableCell>
+        <TableCell numeric>
+          <Link to={`user/${u.id}`}>
+            <IconBtn>
+              <Icon>keyboard_arrow_right</Icon>
+            </IconBtn>
+          </Link>
+        </TableCell>
       </DatatableRow>
     )
   }
@@ -86,6 +99,9 @@ class Users extends React.Component<IProps & ReturnType<typeof dispatch2props>, 
   private renderExpendedRow(u: IUser): ReactChild {
     return (
       <>
+        <div>
+          <Chip></Chip>
+        </div>
         {u.address &&
         <div>
           {u.address.number}

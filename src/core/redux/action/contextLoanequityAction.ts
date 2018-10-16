@@ -16,6 +16,7 @@ export const getContextLoanequity = () => (dispatch, getState: () => RootState) 
     }
   })
 }
+
 export const updateContextLoanequity = (c: IContextLoanequity) => (dispatch, getState: () => RootState) => {
   const key = getConsumerKey(getState())
   return dispatch({
