@@ -1,6 +1,9 @@
 import {messages} from './messages'
 
-export const messagesFr: typeof messages = {
+export const messages_fr: typeof messages = {
+  lang_fr: 'Français',
+  lang_en: 'Anglais',
+
   name: 'Nom',
   firstName: 'Prénom',
   lastName: 'Nom',
@@ -48,6 +51,7 @@ export const messagesFr: typeof messages = {
   selectAForm: 'Choisissez un formulaire',
   selectAMetric: 'Choisissez une offre',
   codeChecksum: 'Code',
+  agegae: (x: string) => `${x} blal`,
   script: 'Script',
   home: 'Accueil',
   save: 'Enregistrer',
@@ -68,6 +72,7 @@ export const messagesFr: typeof messages = {
   dashboard: 'Accueil',
   configuration: 'Configuration',
   general: 'General',
+  chooseLanguage: 'Choix de la langue',
 
   fundraiseType_FUNDRAISE_LOAN: 'Prêt',
   fundraiseType_FUNDRAISE_EQUITY: 'Actions',

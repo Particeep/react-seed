@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {createStyles, Theme, WithStyles, withStyles} from '@material-ui/core'
-import {WithI18n, withI18n} from '../../../core/i18n/withI18n'
+import {WithI18n, withI18n} from '../../../core/i18n/I18n'
 import {compose} from 'redux'
 import {AnimateList, IconBtn, withGlobalProgress, withToast} from 'react-components'
 import {connect} from 'react-redux'

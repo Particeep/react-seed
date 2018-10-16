@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {ReactChild} from 'react'
 import {createStyles, Icon, Theme, Typography, WithStyles, withStyles} from '@material-ui/core'
-import {WithI18n, withI18n} from '../../core/i18n/withI18n'
+import {WithI18n, withI18n} from '../../core/i18n/I18n'
 import {compose} from 'redux'
 import {IConsumer} from '../../type/consumer'
 import {Em, H1} from '../../shared/tag/tag'
@@ -57,8 +57,8 @@ class ConsumerCard extends React.Component<IProps, any> {
   }
 }
 
-export default compose(
-  withI18n,
-  withStyles(styles),
-)(ConsumerCard)
+export default withStyles(styles)(
+  withI18n(
+    ConsumerCard)
+)
 

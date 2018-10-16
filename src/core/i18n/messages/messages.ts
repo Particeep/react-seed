@@ -1,4 +1,7 @@
 export const messages = {
+  lang_fr: 'French',
+  lang_en: 'English',
+
   name: 'Name',
   firstName: 'First name',
   lastName: 'Last name',
@@ -66,6 +69,7 @@ export const messages = {
   dashboard: 'Dashboard',
   configuration: 'Configuration',
   general: 'General',
+  chooseLanguage: 'Choose your language',
 
   fundraiseType_FUNDRAISE_LOAN: 'Loan',
   fundraiseType_FUNDRAISE_EQUITY: 'Equity',
@@ -120,6 +124,7 @@ export const messages = {
   ContextLoanEquity_desc_has_fundraise_loan: 'Allow product owners to create loan fundraises',
   ContextLoanEquity_title_pending_transactions_enabled: 'Enable pending transactions',
   ContextLoanEquity_desc_pending_transactions_enabled: 'Investors will be able to create transactions and pay for it later',
+  agegae: (x: string) => `${x} blal`,
 
   DarkTheme_title: 'Dark theme',
   DarkTheme_desc: 'Dark theme turns the light surfaces of the page dark, creating an experience ideal for night. Try it out!',

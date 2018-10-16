@@ -7,7 +7,7 @@ import {RootState} from '../../../core/redux/reducer/index'
 import DatatableColumnsFilter from './DatatableColumnsFilter'
 import autobind from 'autobind-decorator'
 import {withI18n} from '../../../core/i18n'
-import {WithI18n} from '../../../core/i18n/withI18n'
+import {WithI18n} from '../../../core/i18n/I18n'
 
 const styles = (t: Theme) => createStyles({
   row: {
@@ -18,6 +18,7 @@ const styles = (t: Theme) => createStyles({
     paddingRight: t.spacing.unit * 1.5,
     display: 'flex',
     alignItems: 'center',
+    borderBottom: `1px solid ${t.palette.divider}`,
   },
   content: {
     flex: 1,

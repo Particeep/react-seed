@@ -10,7 +10,7 @@ import {
   WithStyles,
   withStyles
 } from '@material-ui/core'
-import {WithI18n, withI18n} from '../../../../core/i18n/withI18n'
+import {WithI18n, withI18n} from '../../../../core/i18n/I18n'
 import {AnimateList, IconBtn, withGlobalProgress, withToast} from 'react-components'
 import {connect} from 'react-redux'
 import autobind from 'autobind-decorator'
@@ -20,6 +20,7 @@ import {RootState} from '../../../../core/redux/reducer/index'
 import {WithGlobalProgress} from '../../../../type/lib/withGlobalProgress'
 import {WithToast} from '../../../../type/lib/withToast'
 import {css} from '../../../../conf/style'
+import {compose} from 'redux'
 
 const styles = (t: Theme) => createStyles({
   icon: {
@@ -108,10 +109,3 @@ export default withStyles(styles)(
     )
   )
 )
-// export default compose(
-//   withStyles(styles),
-//   connect(state2props, dispatch2props),
-//   withGlobalProgress,
-//   withToast,
-//   withI18n,
-// )(SettingsConfigItem)
