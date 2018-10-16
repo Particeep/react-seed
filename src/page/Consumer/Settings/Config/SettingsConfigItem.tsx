@@ -1,7 +1,8 @@
 import * as React from 'react'
 import {
   createStyles,
-  Icon, ListItem,
+  Icon,
+  ListItem,
   ListItemSecondaryAction,
   ListItemText,
   Switch,
@@ -20,7 +21,6 @@ import {RootState} from '../../../../core/redux/reducer/index'
 import {WithGlobalProgress} from '../../../../type/lib/withGlobalProgress'
 import {WithToast} from '../../../../type/lib/withToast'
 import {css} from '../../../../conf/style'
-import {compose} from 'redux'
 
 const styles = (t: Theme) => createStyles({
   icon: {
@@ -46,7 +46,7 @@ interface IProps extends WithI18n,
   warning?: string
 }
 
-class SettingsConfigItem extends React.Component<IProps & ReturnType<typeof state2props> & ReturnType<typeof dispatch2props>, {}> {
+class SettingsConfigItem extends React.Component<IProps & ReturnType<typeof state2props> & typeof dispatch2props, {}> {
 
   render() {
     const {classes, warning, name, context, title, desc, disabled, icon} = this.props
@@ -95,16 +95,17 @@ const state2props = (state: RootState, ownProps: IProps) => ({
   context: state.contextLoanEquity.entity,
 })
 
-const dispatch2props = (dispatch: any, ownProps: any) => ({
-  update: (c: IContextLoanequity) => dispatch(updateContextLoanequity(c)),
-})
+const dispatch2props = {
+  update: updateContextLoanequity,
+}
 
-export default withStyles(styles)(
-  connect(state2props, dispatch2props)(
-    withGlobalProgress(
-      withToast(
-        withI18n(
-          SettingsConfigItem)
+export default withI18n(
+  withStyles(styles)(
+    connect(state2props, dispatch2props)(
+      withGlobalProgress(
+        withToast(
+          SettingsConfigItem
+        )
       )
     )
   )

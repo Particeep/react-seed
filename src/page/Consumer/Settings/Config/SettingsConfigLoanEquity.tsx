@@ -46,7 +46,7 @@ class SettingsConfigLoanEquity extends React.Component<IProps & ReturnType<typeo
             title={t.ContextLoanEquity_title_offline_payment}
             desc={t.ContextLoanEquity_desc_offline_payment}
             disabled={!consumer || !consumer.wallet_service}
-            warning={!consumer || !consumer.wallet_service && t.ContextLoanEquity_warning_offline_payment}
+            warning={!consumer || !consumer.wallet_service ? t.ContextLoanEquity_warning_offline_payment : undefined}
           />
           <SettingsConfigItem
             icon="business"

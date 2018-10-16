@@ -27,6 +27,7 @@ class User extends React.Component<IProps & ReturnType<typeof dispatch2props>, {
         <PageHead title={t.Users_title}/>
         <Page>
           <Panel>
+            User
           </Panel>
         </Page>
       </>

@@ -20,6 +20,7 @@ class Dashboard extends React.Component<IProps, {}> {
       <>
         <PageHead title={t.dashboard}/>
         <Page>
+          Dashboard
         </Page>
       </>
     )

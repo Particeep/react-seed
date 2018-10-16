@@ -21,16 +21,19 @@ interface IProps {
 
 export interface WithI18n {
   t: typeof messages;
-  availableLangs: Array<AppLang>;
+  availableLangs: AppLang[];
   formatDate: (d: Date) => string;
   formatTime: (d: Date) => string;
   formatDateTime: (d: Date) => string;
   formatAmount: (amount?: number, currency?: string) => ReactNode;
 }
 
+// TODO Wierd bug when trying to strongly type withI18n with the following line.
+// ): React.SFC<Pick<P, Exclude<keyof P, keyof WithI18n>>> => (props: Pick<P, Exclude<keyof P, keyof WithI18n>>) => (
+
 export const withI18n = <P extends object>(
   Component: React.ComponentType<P & WithI18n>
-): React.SFC<Pick<P, Exclude<keyof P, keyof WithI18n>>> => (props: Pick<P, Exclude<keyof P, keyof WithI18n>>) => (
+): React.SFC<any> => (props: Pick<P, Exclude<keyof P, keyof WithI18n>>) => (
   <I18nContext.Consumer>
     {(m: typeof messages) => <Component
       {...props}

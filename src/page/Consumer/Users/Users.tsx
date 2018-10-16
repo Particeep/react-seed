@@ -58,7 +58,7 @@ class Users extends React.Component<IProps & ReturnType<typeof dispatch2props>, 
                 <TableSortCell name="email">{t.email}</TableSortCell>
                 <TableSortCell name="phone">{t.phone}</TableSortCell>
                 <TableSortCell name="roles">{t.validated}</TableSortCell>
-                <TableSortCell></TableSortCell>
+                <TableSortCell/>
               </DatatableHead>
               <DatatableBody renderRow={this.renderRow}/>
             </Datatable>
@@ -100,7 +100,7 @@ class Users extends React.Component<IProps & ReturnType<typeof dispatch2props>, 
     return (
       <>
         <div>
-          <Chip></Chip>
+          <Chip/>
         </div>
         {u.address &&
         <div>
