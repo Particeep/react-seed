@@ -13,8 +13,8 @@ interface ICrudState<T> {
   isDeleting: boolean
 }
 
-const defaultState = <T>(): ICrudState<T> => ({
-  entity: undefined,
+const defaultState = <T>(defaultEntity?: T): ICrudState<T> => ({
+  entity: defaultEntity,
   error: undefined,
   isFetching: false,
   isCreating: false,
@@ -99,7 +99,7 @@ const remove = {
   }),
 }
 
-export const crudReducer = <T extends IEntity>(name: string): ICrudReducer<T> => createReducer<ICrudState<T>>(defaultState<T>(), {
+export const crudReducer = <T extends IEntity>(name: string, defaultEntity?: T): ICrudReducer<T> => createReducer<ICrudState<T>>(defaultState<T>(defaultEntity), {
   [_CRUD(name).GET.REQUEST]: fetch.request,
   [_CRUD(name).GET.SUCCESS]: fetch.success,
   [_CRUD(name).GET.FAILURE]: fetch.failure,

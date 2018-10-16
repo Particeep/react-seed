@@ -88,6 +88,8 @@ export const messages = {
   Template_AAP: 'Call for projects platform',
   Template_undefined: 'API Sandbox',
 
+  Profile_title: 'Profile',
+
   Users_title: 'Users management',
   Users_created_at: 'Registration',
 

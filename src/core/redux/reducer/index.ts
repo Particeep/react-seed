@@ -16,6 +16,8 @@ import {LOANEQUITY} from '../action/contextLoanequityAction'
 import {USERS} from '../action/userAction'
 import {FUNDRAISES} from '../action/fundraiseAction'
 import {i18nReducer} from './i18nReducer'
+import {CONNECTEDUSER} from '../action/connectedUser'
+import {getAppParams} from '../../../conf/params'
 
 const storage = new LocalStorageEntity('particeep-setup-state')
 
@@ -24,6 +26,7 @@ const persistedState = storage.load() || {}
 const rootReducer = combineReducers({
   consumers: crudListReducer<IConsumer>(CONSUMERS),
   consumer: crudReducer<IConsumer>(CONSUMER),
+  connectedUser: crudReducer<IUser>(CONNECTEDUSER, getAppParams().connectedUser),
   contextLoanEquity: crudReducer<IContextLoanequity>(LOANEQUITY),
   paginate: combineReducers({
     users: paginateReducer<IUser>(USERS),

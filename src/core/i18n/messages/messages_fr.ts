@@ -91,6 +91,8 @@ export const messages_fr: typeof messages = {
   Template_AAP: 'Plateforme d\'appels à projets',
   Template_undefined: 'API Sandbox',
 
+  Profile_title: 'Profil',
+
   Users_title: 'Gestion des utilisateurs',
   Users_created_at: 'Inscription',
 

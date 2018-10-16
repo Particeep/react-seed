@@ -1,4 +1,5 @@
 import * as React from 'react'
+import {ReactChild} from 'react'
 import {createStyles, Icon, Paper, Slide, Theme, WithStyles, withStyles} from '@material-ui/core'
 import {WithI18n, withI18n} from '../../i18n/I18n'
 import {sidebarWith} from './SidebarLayout'
@@ -11,7 +12,7 @@ import {PaletteColor} from '@material-ui/core/styles/createPalette'
 import {NavLink} from 'react-router-dom'
 import {IconBtn} from 'react-components'
 import Link from '../../../shared/Link/Link'
-import {ReactChild} from 'react'
+import {fade} from '@material-ui/core/styles/colorManipulator'
 
 export const sidebarPalette = (t: Theme): PaletteColor => t.palette.primary
 
@@ -30,10 +31,28 @@ const styles = (t: Theme) => createStyles({
     borderRadius: 0,
   },
   head: {
-    textAlign: 'center',
     paddingTop: t.spacing.unit * 2,
     paddingBottom: t.spacing.unit,
-    display: 'block',
+  },
+  name: {
+    marginRight: t.spacing.unit,
+    // color: t.palette.primary.main,
+    // color: t.palette.text.primary,
+    fontSize: t.typography.subheading.fontSize,
+  },
+  email: {
+    color: t.palette.text.secondary,
+    // color: fade(t.palette.primary.main, .6),
+    fontSize: t.typography.caption.fontSize,
+  },
+  profile: {
+    display: 'flex',
+    alignItems: 'center',
+    transition: t.transitions.create('color'),
+
+    '&:hover': {
+      color: t.palette.primary.main,
+    }
   },
   main: {
     paddingTop: t.spacing.unit,
@@ -46,8 +65,10 @@ const styles = (t: Theme) => createStyles({
     paddingBottom: t.spacing.unit,
   },
   avatar: {
-    background: t.palette.divider,
-    margin: 'auto',
+    background: fade(t.palette.primary.main, .3),
+    color: t.palette.primary.main,
+    marginLeft: t.spacing.unit,
+    marginRight: t.spacing.unit,
   },
 })
 
@@ -64,24 +85,35 @@ class Sidebar extends React.Component<IProps, {}> {
   }
 
   render() {
-    const {t, classes, basePath} = this.props
+    const {t, connectedUser, classes} = this.props
     return (
       <Slide direction="right" in={true} mountOnEnter unmountOnExit>
         <Paper elevation={4} className={classes.root}>
           <header className={classes.head}>
-            <Avatar size={100} className={classes.avatar}/>
+            <Link to={this.route('profile')}>
+              <div className={classes.profile}>
+                <Avatar size={50} className={classes.avatar}/>
+                <div>
+                  <div className={classes.name}>
+                    {connectedUser!.first_name}&nbsp;
+                    {connectedUser!.last_name}
+                  </div>
+                  <div className={classes.email}>{connectedUser!.email}</div>
+                </div>
+              </div>
+            </Link>
           </header>
           <SidebarHr/>
           {this.renderHome()}
           <SidebarHr/>
           <main className={classes.main}>
-            <SidebarItem to={basePath + '/users'} icon="people">
+            <SidebarItem to={this.route('users')} icon="people">
               {t.users}
             </SidebarItem>
-            <SidebarItem to={basePath + '/fundraises'} icon="business">
+            <SidebarItem to={this.route('fundraises')} icon="business">
               {t.fundraises}
             </SidebarItem>
-            <SidebarItem to={basePath + '/settings'} icon="settings">
+            <SidebarItem to={this.route('settings')} icon="settings">
               {t.settings}
             </SidebarItem>
           </main>
@@ -97,10 +129,10 @@ class Sidebar extends React.Component<IProps, {}> {
   }
 
   private renderHome(): ReactChild {
-    const {t, classes, basePath} = this.props
+    const {t, classes} = this.props
     return (
       <div style={{display: 'flex', alignItems: 'stretch'}}>
-        <SidebarItem to={basePath + '/dashboard'} icon="home" style={{flex: 1}}>
+        <SidebarItem to={this.route('dashboard')} icon="home" style={{flex: 1}}>
           {t.dashboard}
         </SidebarItem>
         <Link to="/consumers">
@@ -111,8 +143,15 @@ class Sidebar extends React.Component<IProps, {}> {
       </div>
     )
   }
+
+  private route(path: string): string {
+    const {basePath} = this.props
+    return basePath + '/' + path
+  }
 }
 
-const state2props = (state: RootState) => ({})
+const state2props = (state: RootState) => ({
+  connectedUser: state.connectedUser.entity,
+})
 
 export default withI18n(withStyles(styles)(connect(state2props, undefined, undefined, {pure: false})(Sidebar)))

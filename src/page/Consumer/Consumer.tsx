@@ -16,6 +16,7 @@ import Fundraises from './Fundraises/Fundraises'
 import Settings from './Settings/Settings'
 import Dashboard from './Dashboard/Dashboard'
 import User from './User/User'
+import Profile from './Profile/Profile'
 
 const styles = (t: Theme) => createStyles({})
 
@@ -37,6 +38,7 @@ class Consumer extends React.Component<IProps, any> {
         <Sidebar basePath={match.url}/>
         {consumer &&
           <Switch>
+            <Route path={this.route('/profile')} component={Profile}/>
             <Route path={this.route('/dashboard')} component={Dashboard}/>
             <Route path={this.route('/users')} component={Users}/>
             <Route path={this.route('/user/:id')} component={User}/>

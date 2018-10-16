@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {ReactChild, ReactElement} from 'react'
-import {Table, TablePagination} from '@material-ui/core'
+import {Table, TableBody, TablePagination, TableRow} from '@material-ui/core'
 import {Criteria, OrderByType} from '../../type/criteria/criteria'
 import autobind from 'autobind-decorator'
 import {RootState} from '../../core/redux/reducer/index'
@@ -81,14 +81,19 @@ class Datatable extends React.Component<IProps & ReturnType<typeof state2props>,
               {children}
             </Table>
           </div>
-          <TablePagination
-            style={{display: 'block'}}
-            count={size || 0}
-            rowsPerPage={criteria.limit}
-            page={page}
-            onChangePage={this.handleChangePage}
-            onChangeRowsPerPage={this.handleChangeRowsPerPage}
-          />
+          <Table>
+            <TableBody>
+              <TableRow>
+                <TablePagination
+                  count={size || 0}
+                  rowsPerPage={criteria.limit}
+                  page={page}
+                  onChangePage={this.handleChangePage}
+                  onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                />
+              </TableRow>
+            </TableBody>
+          </Table>
         </>
       </DatatableContext.Provider>
     )
