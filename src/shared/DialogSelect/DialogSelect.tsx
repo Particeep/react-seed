@@ -11,7 +11,7 @@ import {
   WithStyles,
   withStyles
 } from '@material-ui/core'
-import {WithI18n, withI18n} from '../../core/i18n/withI18n'
+import {WithI18n, withI18n} from '../../core/i18n/I18n'
 import autobind from 'autobind-decorator'
 import {Btn} from 'react-components'
 

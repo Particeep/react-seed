@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {ReactChild} from 'react'
 import {Chip, createStyles, Icon, TableCell, Theme, WithStyles, withStyles} from '@material-ui/core'
-import {WithI18n, withI18n} from '../../../core/i18n/withI18n'
+import {WithI18n, withI18n} from '../../../core/i18n/I18n'
 import {compose} from 'redux'
 import {Animate, AnimateList, IconBtn, TableSortCell, withGlobalProgress, withToast} from 'react-components'
 import autobind from 'autobind-decorator'

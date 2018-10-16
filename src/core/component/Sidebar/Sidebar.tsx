@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {createStyles, Icon, Paper, Slide, Theme, WithStyles, withStyles} from '@material-ui/core'
-import {WithI18n, withI18n} from '../../i18n/withI18n'
+import {WithI18n, withI18n} from '../../i18n/I18n'
 import {sidebarWith} from './SidebarLayout'
 import SidebarHr from './SidebarHr'
 import SidebarItem from './SidebarItem'

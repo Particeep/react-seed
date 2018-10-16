@@ -9,7 +9,7 @@ import {
   WithStyles,
   withStyles
 } from '@material-ui/core'
-import {WithI18n, withI18n} from '../../../core/i18n/withI18n'
+import {WithI18n, withI18n} from '../../../core/i18n/I18n'
 import {compose} from 'redux'
 import {TableSortCell, AnimateList, withGlobalProgress, withToast} from 'react-components'
 import {Datatable, DatatableBody, DatatableHead, DatatableToolbar} from '../../../shared/Datatable'

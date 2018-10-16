@@ -1,24 +1,26 @@
 import {IEntity} from '../../../type/entity'
 import {createReducer} from './utils/createReducer'
-import {_TOGGLE_DARK_THEME} from '../action/themeAction'
+import {_CHANGE_CURRENT_LANG} from '../action/i18nAction'
+import {AppLang} from '../../i18n/I18n'
+import {getAppParams} from '../../../conf/params'
 
 interface IThemeState {
-  isDark: boolean;
+  lang: AppLang;
 }
 
 export type IThemeReducer = (s: IThemeState, action: any) => IThemeState
 
 const defaultState: IThemeState = {
-  isDark: false,
+  lang: getAppParams().currentLang,
 }
 
 const toggleDarkTheme: IThemeReducer = <T extends IEntity>(state: IThemeState, action) => ({
   ...state,
-  isDark: !state.isDark,
+  lang: action.lang,
 })
 
-export const themeReducer = createReducer<IThemeState>(defaultState, {
-  [_TOGGLE_DARK_THEME]: toggleDarkTheme,
+export const i18nReducer = createReducer<IThemeState>(defaultState, {
+  [_CHANGE_CURRENT_LANG]: toggleDarkTheme,
 })
 
 

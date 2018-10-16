@@ -15,6 +15,7 @@ import {CONSUMER, CONSUMERS} from '../action/consumerAction'
 import {LOANEQUITY} from '../action/contextLoanequityAction'
 import {USERS} from '../action/userAction'
 import {FUNDRAISES} from '../action/fundraiseAction'
+import {i18nReducer} from './i18nReducer'
 
 const storage = new LocalStorageEntity('particeep-setup-state')
 
@@ -30,6 +31,7 @@ const rootReducer = combineReducers({
   }),
   ui: combineReducers({
     theme: themeReducer,
+    i18n: i18nReducer,
   })
 })
 
@@ -48,7 +50,8 @@ export const store: Store<RootState> = createStore(
 store.subscribe(() => {
   storage.save({
     ui: {
-      theme: store.getState().ui.theme
+      theme: store.getState().ui.theme,
+      i18n: store.getState().ui.i18n,
     }
   })
 })

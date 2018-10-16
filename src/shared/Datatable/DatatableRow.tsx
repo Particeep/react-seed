@@ -7,8 +7,7 @@ import {RootState} from '../../core/redux/reducer/index'
 import {connect} from 'react-redux'
 import autobind from 'autobind-decorator'
 import {withI18n} from '../../core/i18n'
-import {compose} from 'redux'
-import {WithI18n} from '../../core/i18n/withI18n'
+import {WithI18n} from '../../core/i18n/I18n'
 import PanelContent from '../Panel/PanelContent'
 import classNames from 'classnames'
 
@@ -111,9 +110,7 @@ const state2props = (state: RootState, ownProps: IProps) => {
   }
 }
 
-export default compose(
-  withI18n,
-  datatableConsumer,
-  connect(state2props),
-  withStyles(styles),
-)(DatatableRow)
+export default withI18n(datatableConsumer(
+  connect(state2props)(
+    withStyles(styles)
+    (DatatableRow))))
