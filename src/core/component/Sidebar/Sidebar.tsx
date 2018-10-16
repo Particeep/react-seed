@@ -32,7 +32,7 @@ const styles = (t: Theme) => createStyles({
   },
   head: {
     paddingTop: t.spacing.unit * 2,
-    paddingBottom: t.spacing.unit,
+    paddingBottom: t.spacing.unit * 2,
   },
   name: {
     marginRight: t.spacing.unit,
